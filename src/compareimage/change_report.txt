@@ -1,0 +1,248 @@
+IMAGE CHANGE REPORT
+==================
+
+Comparing:
+  - 0
+  - 0
+
+Overall Similarity: 0.97 (0-1 scale, higher means more similar)
+Changed Area: 1.5% of the image
+
+Change grouping: Enabled (grouped 138 individual changes into 23 groups)
+Grouping distance: 50 pixels
+
+CONTENT CHANGES DETECTED (23 total)
+------------------------
+
+GROUPED CHANGES (23 groups):
+  1. Group #1: Contains 11 related changes
+     Description: Group of 11 related changes: Group of 11 changes, mostly Shape/Structure Change
+     Location: x=315, y=696, width=132, height=14
+     Contains:
+       - Change 1: Color Change - Color changed from White to Light Gray
+       - Change 2: Color Change - Color changed from White to Light Gray
+       - Change 3: Content Change - Removed content in this region
+       - Change 4: Content Change - Removed content in this region
+       - Change 5: Color Change - Color changed from White to Light Gray
+       - Change 6: Color Change - Color changed from White to Light Gray
+       - Change 7: Content Change - Removed content in this region
+       - Change 8: Content Change - Added content in this region
+       - Change 9: Content Change - Added content in this region
+       - Change 10: Content Change - Removed content in this region
+       - Change 11: Content Change - Added content in this region
+  2. Group #2: Contains 2 related changes
+     Description: Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change
+     Location: x=1348, y=696, width=35, height=14
+     Contains:
+       - Change 1: Content Change - Added content in this region
+       - Change 2: Content Change - Removed content in this region
+  3. Group #3: Contains 1 related changes
+     Description: Group of 1 related changes: Group of 1 changes, mostly Minor Visual Change
+     Location: x=1092, y=696, width=9, height=11
+     Contains:
+       - Change 1: Content Change - Added content in this region
+  4. Group #4: Contains 2 related changes
+     Description: Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change
+     Location: x=836, y=696, width=36, height=14
+     Contains:
+       - Change 1: Content Change - Added content in this region
+       - Change 2: Content Change - Removed content in this region
+  5. Group #5: Contains 1 related changes
+     Description: Group of 1 related changes: Text changed from '(Overdue )' to 'On Track'
+     Location: x=1593, y=685, width=97, height=35
+     Contains:
+       - Change 1: Text Change - Words removed: '(Overdue )'; Words added: 'On Track'
+  6. Group #6: Contains 13 related changes
+     Description: Group of 13 related changes: Group of 13 changes, mostly Brightness Decreased
+     Location: x=318, y=611, width=170, height=18
+     Contains:
+       - Change 1: Color Change - Color changed from White to Light Gray
+       - Change 2: Color Change - Color changed from White to Light Gray
+       - Change 3: Color Change - Color changed from White to Light Gray
+       - Change 4: Color Change - Color changed from White to Light Gray
+       - Change 5: Content Change - Removed content in this region
+       - Change 6: Content Change - Removed content in this region
+       - Change 7: Content Change - Removed content in this region
+       - Change 8: Color Change - Color changed from White to Light Gray
+       - Change 9: Content Change - Added content in this region
+       - Change 10: Content Change - Added content in this region
+       - Change 11: Content Change - Added content in this region
+       - Change 12: Color Change - Color changed from White to Gray
+       - Change 13: Content Change - Added content in this region
+  7. Group #7: Contains 3 related changes
+     Description: Group of 3 related changes: Text changed from ')' to 'At Risk'
+     Location: x=1609, y=600, width=77, height=34
+     Contains:
+       - Change 1: Color Change - Color changed from Pink to White
+       - Change 2: Text Change - Text added: 'At Risk'
+       - Change 3: Text Change - Text removed: ')'
+  8. Group #8: Contains 2 related changes
+     Description: Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change
+     Location: x=1348, y=611, width=35, height=14
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+       - Change 2: Content Change - Removed content in this region
+  9. Group #9: Contains 1 related changes
+     Description: Group of 1 related changes: Group of 1 changes, mostly Shape/Structure Change
+     Location: x=1082, y=611, width=19, height=14
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+  10. Group #10: Contains 2 related changes
+     Description: Group of 2 related changes: Group of 2 changes, mostly Minor Visual Change
+     Location: x=827, y=611, width=19, height=14
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+       - Change 2: Content Change - Added content in this region
+  11. Group #11: Contains 12 related changes
+     Description: Group of 12 related changes: Text changed from '=' to '4'
+     Location: x=61, y=522, width=176, height=21
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+       - Change 2: Content Change - Added content in this region
+       - Change 3: Color Change - Color changed from Light Gray to White
+       - Change 4: Content Change - Removed content in this region
+       - Change 5: Color Change - Color changed from Light Gray to White
+       - Change 6: Content Change - Removed content in this region
+       - Change 7: Color Change - Color changed from Light Gray to White
+       - Change 8: Content Change - Added content in this region
+       - Change 9: Color Change - Color changed from White to Light Gray
+       - Change 10: Color Change - Color changed from Light Gray to White
+       - Change 11: Content Change - Removed content in this region
+       - Change 12: Text Change - Words removed: '='; Words added: '4'
+  12. Group #12: Contains 2 related changes
+     Description: Group of 2 related changes: Group of 2 changes, mostly Minor Visual Change
+     Location: x=827, y=525, width=19, height=14
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+       - Change 2: Content Change - Added content in this region
+  13. Group #13: Contains 4 related changes
+     Description: Group of 4 related changes: Group of 4 changes, mostly Brightness Decreased
+     Location: x=316, y=525, width=122, height=18
+     Contains:
+       - Change 1: Color Change - Color changed from White to Light Gray
+       - Change 2: Color Change - Color changed from White to Light Gray
+       - Change 3: Content Change - Added content in this region
+       - Change 4: Content Change - Added content in this region
+  14. Group #14: Contains 3 related changes
+     Description: Group of 3 related changes: Text changed from ')' to 'At Risk'
+     Location: x=1609, y=514, width=77, height=35
+     Contains:
+       - Change 1: Color Change - Color changed from Pink to White
+       - Change 2: Text Change - Text added: 'At Risk'
+       - Change 3: Text Change - Text removed: ')'
+  15. Group #15: Contains 3 related changes
+     Description: Group of 3 related changes: Group of 3 changes, mostly Shape/Structure Change
+     Location: x=1338, y=525, width=45, height=14
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+       - Change 2: Content Change - Removed content in this region
+       - Change 3: Content Change - Removed content in this region
+  16. Group #16: Contains 1 related changes
+     Description: Group of 1 related changes: Group of 1 changes, mostly Shape/Structure Change
+     Location: x=1092, y=525, width=9, height=14
+     Contains:
+       - Change 1: Content Change - Added content in this region
+  17. Group #17: Contains 6 related changes
+     Description: Group of 6 related changes: Group of 6 changes, mostly Shape/Structure Change
+     Location: x=588, y=514, width=155, height=35
+     Contains:
+       - Change 1: Content Change - Added content in this region
+       - Change 2: Content Change - Removed content in this region
+       - Change 3: Content Change - Removed content in this region
+       - Change 4: Content Change - Removed content in this region
+       - Change 5: Content Change - Removed content in this region
+       - Change 6: Color Change - Color changed from Pink to White
+  18. Group #18: Contains 29 related changes
+     Description: Group of 29 related changes: Group of 29 changes, mostly Brightness Increased
+     Location: x=1177, y=242, width=146, height=30
+     Contains:
+       - Change 1: Color Change - Color changed from Light Gray to White
+       - Change 2: Color Change - Color changed from Light Gray to White
+       - Change 3: Color Change - Color changed from Light Gray to White
+       - Change 4: Color Change - Color changed from Light Gray to White
+       - Change 5: Color Change - Color changed from Light Gray to White
+       - Change 6: Color Change - Color changed from Light Gray to White
+       - Change 7: Color Change - Color changed from Light Gray to White
+       - Change 8: Color Change - Color changed from Light Gray to White
+       - Change 9: Color Change - Color changed from Light Gray to White
+       - Change 10: Color Change - Color changed from Light Gray to White
+       - Change 11: Color Change - Color changed from Light Gray to White
+       - Change 12: Color Change - Color changed from Light Gray to White
+       - Change 13: Color Change - Color changed from Light Gray to White
+       - Change 14: Color Change - Color changed from Light Gray to White
+       - Change 15: Color Change - Color changed from Light Gray to White
+       - Change 16: Color Change - Color changed from White to Light Gray
+       - Change 17: Color Change - Color changed from White to Light Gray
+       - Change 18: Color Change - Color changed from White to Light Gray
+       - Change 19: Color Change - Color changed from White to Light Gray
+       - Change 20: Color Change - Color changed from White to Light Gray
+       - Change 21: Color Change - Color changed from White to Light Gray
+       - Change 22: Color Change - Color changed from White to Light Gray
+       - Change 23: Color Change - Color changed from White to Light Gray
+       - Change 24: Color Change - Color changed from White to Light Gray
+       - Change 25: Color Change - Color changed from White to Light Gray
+       - Change 26: Color Change - Color changed from White to Light Gray
+       - Change 27: Color Change - Color changed from White to Light Gray
+       - Change 28: Color Change - Color changed from White to Light Gray
+       - Change 29: Color Change - Color changed from White to Light Gray
+  19. Group #19: Contains 5 related changes
+     Description: Group of 5 related changes: Group of 5 changes, mostly Shape/Structure Change
+     Location: x=1485, y=232, width=127, height=12
+     Contains:
+       - Change 1: Content Change - Added content in this region
+       - Change 2: Content Change - Added content in this region
+       - Change 3: Content Change - Added content in this region
+       - Change 4: Content Change - Added content in this region
+       - Change 5: Content Change - Added content in this region
+  20. Group #20: Contains 1 related changes
+     Description: Group of 1 related changes: Group of 1 changes, mostly Minor Visual Change
+     Location: x=1403, y=186, width=67, height=69
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+  21. Group #21: Contains 28 related changes
+     Description: Group of 28 related changes: Group of 28 changes, mostly Brightness Decreased
+     Location: x=1406, y=109, width=238, height=77
+     Contains:
+       - Change 1: Color Change - Color changed from Light Gray to White
+       - Change 2: Color Change - Color changed from Light Gray to White
+       - Change 3: Color Change - Color changed from Light Gray to White
+       - Change 4: Color Change - Color changed from Light Gray to White
+       - Change 5: Color Change - Color changed from Light Gray to White
+       - Change 6: Color Change - Color changed from Light Gray to White
+       - Change 7: Color Change - Color changed from Light Gray to White
+       - Change 8: Color Change - Color changed from Light Gray to White
+       - Change 9: Color Change - Color changed from Light Gray to White
+       - Change 10: Color Change - Color changed from Light Gray to White
+       - Change 11: Color Change - Color changed from Light Gray to White
+       - Change 12: Color Change - Color changed from Light Gray to White
+       - Change 13: Color Change - Color changed from Light Gray to White
+       - Change 14: Color Change - Color changed from White to Light Gray
+       - Change 15: Color Change - Color changed from White to Light Gray
+       - Change 16: Color Change - Color changed from White to Light Gray
+       - Change 17: Color Change - Color changed from White to Light Gray
+       - Change 18: Color Change - Color changed from White to Light Gray
+       - Change 19: Color Change - Color changed from White to Light Gray
+       - Change 20: Color Change - Color changed from White to Light Gray
+       - Change 21: Color Change - Color changed from White to Light Gray
+       - Change 22: Color Change - Color changed from White to Light Gray
+       - Change 23: Color Change - Color changed from White to Light Gray
+       - Change 24: Color Change - Color changed from White to Light Gray
+       - Change 25: Color Change - Color changed from White to Light Gray
+       - Change 26: Color Change - Color changed from White to Light Gray
+       - Change 27: Color Change - Color changed from White to Light Gray
+       - Change 28: Color Change - Color changed from Pink to Gray
+  22. Group #22: Contains 5 related changes
+     Description: Group of 5 related changes: Group of 5 changes, mostly Shape/Structure Change
+     Location: x=1186, y=121, width=126, height=22
+     Contains:
+       - Change 1: Content Change - Removed content in this region
+       - Change 2: Content Change - Added content in this region
+       - Change 3: Content Change - Removed content in this region
+       - Change 4: Content Change - Added content in this region
+       - Change 5: Content Change - Removed content in this region
+  23. Group #23: Contains 1 related changes
+     Description: Group of 1 related changes: Group of 1 changes, mostly Brightness Increased
+     Location: x=1310, y=95, width=96, height=188
+     Contains:
+       - Change 1: Text Change - Text added: 'wg'
+

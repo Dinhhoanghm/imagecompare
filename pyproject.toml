@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "compareimage"
+version = "0.1.0"
+description = "A tool for comparing images and identifying content changes"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+license = "MIT"
+# Make sure the package path is correct
+packages = [{include = "compareimage", from = "src"}]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<4.0"
+numpy = ">=1.20.0"
+matplotlib = ">=3.3.0"
+opencv-python = ">=4.5.0"
+scikit-image = ">=0.18.0"
+scipy = ">=1.6.0"
+scikit-learn = ">=0.24.0"
+pytesseract = {version = ">=0.3.8", optional = true}
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7.0.0"
+black = ">=22.0.0"
+isort = ">=5.10.0"
+flake8 = ">=4.0.0"
+pytest-cov = ">=3.0.0"
+
+[tool.poetry.extras]
+ocr = ["pytesseract"]
+
+# Fixed script path - should point to the actual module path
+[tool.poetry.scripts]
+compareimage = "compareimage.cli:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+line_length = 100

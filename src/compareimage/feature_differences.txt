@@ -1,0 +1,319 @@
+FEATURE DIFFERENCES BETWEEN 0 AND 0
+===================================================================
+
+DIFFERENCE GROUP 1:
+The image 1 is different from image 2 in the feature: Group of 11 related changes
+  - Group of 11 related changes: Group of 11 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=315, y=696) with size 132x14 pixels
+  - Contains the following specific differences:
+    1. Color Change: Color changed from White to Light Gray
+    2. Color Change: Color changed from White to Light Gray
+    3. Content Change: Removed content in this region
+    4. Content Change: Removed content in this region
+    5. Color Change: Color changed from White to Light Gray
+    6. Color Change: Color changed from White to Light Gray
+    7. Content Change: Removed content in this region
+    8. Content Change: Added content in this region
+    9. Content Change: Added content in this region
+    10. Content Change: Removed content in this region
+    11. Content Change: Added content in this region
+  - This group contains color modifications
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 2:
+The image 1 is different from image 2 in the feature: Group of 2 related changes
+  - Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=1348, y=696) with size 35x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Added content in this region
+    2. Content Change: Removed content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 3:
+The image 1 is different from image 2 in the feature: Group of 1 related changes
+  - Group of 1 related changes: Group of 1 changes, mostly Minor Visual Change
+  - Location: Region at coordinates (x=1092, y=696) with size 9x11 pixels
+  - Contains the following specific differences:
+    1. Content Change: Added content in this region
+
+DIFFERENCE GROUP 4:
+The image 1 is different from image 2 in the feature: Group of 2 related changes
+  - Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=836, y=696) with size 36x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Added content in this region
+    2. Content Change: Removed content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 5:
+The image 1 is different from image 2 in the feature: Group of 1 related changes
+  - Text has changed from '(Overdue )' to 'On Track'
+  - Location: Region at coordinates (x=1593, y=685) with size 97x35 pixels
+  - Contains the following specific differences:
+    1. Text Change: Words removed: '(Overdue )'; Words added: 'On Track'
+  - This group contains text modifications
+
+DIFFERENCE GROUP 6:
+The image 1 is different from image 2 in the feature: Group of 13 related changes
+  - Group of 13 related changes: Group of 13 changes, mostly Brightness Decreased
+  - Location: Region at coordinates (x=318, y=611) with size 170x18 pixels
+  - Contains the following specific differences:
+    1. Color Change: Color changed from White to Light Gray
+    2. Color Change: Color changed from White to Light Gray
+    3. Color Change: Color changed from White to Light Gray
+    4. Color Change: Color changed from White to Light Gray
+    5. Content Change: Removed content in this region
+    6. Content Change: Removed content in this region
+    7. Content Change: Removed content in this region
+    8. Color Change: Color changed from White to Light Gray
+    9. Content Change: Added content in this region
+    10. Content Change: Added content in this region
+    11. Content Change: Added content in this region
+    12. Color Change: Color changed from White to Gray
+    13. Content Change: Added content in this region
+  - This group contains color modifications
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 7:
+The image 1 is different from image 2 in the feature: Group of 3 related changes
+  - Text has changed from ')' to 'At Risk'
+  - Location: Region at coordinates (x=1609, y=600) with size 77x34 pixels
+  - Contains the following specific differences:
+    1. Color Change: Color changed from Pink to White
+    2. Text Change: Text added: 'At Risk'
+    3. Text Change: Text removed: ')'
+  - This group contains text modifications
+  - This group contains color modifications
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 8:
+The image 1 is different from image 2 in the feature: Group of 2 related changes
+  - Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=1348, y=611) with size 35x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+    2. Content Change: Removed content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 9:
+The image 1 is different from image 2 in the feature: Group of 1 related changes
+  - Group of 1 related changes: Group of 1 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=1082, y=611) with size 19x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 10:
+The image 1 is different from image 2 in the feature: Group of 2 related changes
+  - Group of 2 related changes: Group of 2 changes, mostly Minor Visual Change
+  - Location: Region at coordinates (x=827, y=611) with size 19x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+    2. Content Change: Added content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 11:
+The image 1 is different from image 2 in the feature: Group of 12 related changes
+  - Text has changed from '=' to '4'
+  - Location: Region at coordinates (x=61, y=522) with size 176x21 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+    2. Content Change: Added content in this region
+    3. Color Change: Color changed from Light Gray to White
+    4. Content Change: Removed content in this region
+    5. Color Change: Color changed from Light Gray to White
+    6. Content Change: Removed content in this region
+    7. Color Change: Color changed from Light Gray to White
+    8. Content Change: Added content in this region
+    9. Color Change: Color changed from White to Light Gray
+    10. Color Change: Color changed from Light Gray to White
+    11. Content Change: Removed content in this region
+    12. Text Change: Words removed: '='; Words added: '4'
+  - This group contains text modifications
+  - This group contains color modifications
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 12:
+The image 1 is different from image 2 in the feature: Group of 2 related changes
+  - Group of 2 related changes: Group of 2 changes, mostly Minor Visual Change
+  - Location: Region at coordinates (x=827, y=525) with size 19x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+    2. Content Change: Added content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 13:
+The image 1 is different from image 2 in the feature: Group of 4 related changes
+  - Group of 4 related changes: Group of 4 changes, mostly Brightness Decreased
+  - Location: Region at coordinates (x=316, y=525) with size 122x18 pixels
+  - Contains the following specific differences:
+    1. Color Change: Color changed from White to Light Gray
+    2. Color Change: Color changed from White to Light Gray
+    3. Content Change: Added content in this region
+    4. Content Change: Added content in this region
+  - This group contains color modifications
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 14:
+The image 1 is different from image 2 in the feature: Group of 3 related changes
+  - Text has changed from ')' to 'At Risk'
+  - Location: Region at coordinates (x=1609, y=514) with size 77x35 pixels
+  - Contains the following specific differences:
+    1. Color Change: Color changed from Pink to White
+    2. Text Change: Text added: 'At Risk'
+    3. Text Change: Text removed: ')'
+  - This group contains text modifications
+  - This group contains color modifications
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 15:
+The image 1 is different from image 2 in the feature: Group of 3 related changes
+  - Group of 3 related changes: Group of 3 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=1338, y=525) with size 45x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+    2. Content Change: Removed content in this region
+    3. Content Change: Removed content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 16:
+The image 1 is different from image 2 in the feature: Group of 1 related changes
+  - Group of 1 related changes: Group of 1 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=1092, y=525) with size 9x14 pixels
+  - Contains the following specific differences:
+    1. Content Change: Added content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 17:
+The image 1 is different from image 2 in the feature: Group of 6 related changes
+  - Group of 6 related changes: Group of 6 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=588, y=514) with size 155x35 pixels
+  - Contains the following specific differences:
+    1. Content Change: Added content in this region
+    2. Content Change: Removed content in this region
+    3. Content Change: Removed content in this region
+    4. Content Change: Removed content in this region
+    5. Content Change: Removed content in this region
+    6. Color Change: Color changed from Pink to White
+  - This group contains color modifications
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 18:
+The image 1 is different from image 2 in the feature: Group of 29 related changes
+  - Group of 29 related changes: Group of 29 changes, mostly Brightness Increased
+  - Location: Region at coordinates (x=1177, y=242) with size 146x30 pixels
+  - Contains the following specific differences:
+    1. Color Change: Color changed from Light Gray to White
+    2. Color Change: Color changed from Light Gray to White
+    3. Color Change: Color changed from Light Gray to White
+    4. Color Change: Color changed from Light Gray to White
+    5. Color Change: Color changed from Light Gray to White
+    6. Color Change: Color changed from Light Gray to White
+    7. Color Change: Color changed from Light Gray to White
+    8. Color Change: Color changed from Light Gray to White
+    9. Color Change: Color changed from Light Gray to White
+    10. Color Change: Color changed from Light Gray to White
+    11. Color Change: Color changed from Light Gray to White
+    12. Color Change: Color changed from Light Gray to White
+    13. Color Change: Color changed from Light Gray to White
+    14. Color Change: Color changed from Light Gray to White
+    15. Color Change: Color changed from Light Gray to White
+    16. Color Change: Color changed from White to Light Gray
+    17. Color Change: Color changed from White to Light Gray
+    18. Color Change: Color changed from White to Light Gray
+    19. Color Change: Color changed from White to Light Gray
+    20. Color Change: Color changed from White to Light Gray
+    21. Color Change: Color changed from White to Light Gray
+    22. Color Change: Color changed from White to Light Gray
+    23. Color Change: Color changed from White to Light Gray
+    24. Color Change: Color changed from White to Light Gray
+    25. Color Change: Color changed from White to Light Gray
+    26. Color Change: Color changed from White to Light Gray
+    27. Color Change: Color changed from White to Light Gray
+    28. Color Change: Color changed from White to Light Gray
+    29. Color Change: Color changed from White to Light Gray
+  - This group contains color modifications
+
+DIFFERENCE GROUP 19:
+The image 1 is different from image 2 in the feature: Group of 5 related changes
+  - Group of 5 related changes: Group of 5 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=1485, y=232) with size 127x12 pixels
+  - Contains the following specific differences:
+    1. Content Change: Added content in this region
+    2. Content Change: Added content in this region
+    3. Content Change: Added content in this region
+    4. Content Change: Added content in this region
+    5. Content Change: Added content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 20:
+The image 1 is different from image 2 in the feature: Group of 1 related changes
+  - Group of 1 related changes: Group of 1 changes, mostly Minor Visual Change
+  - Location: Region at coordinates (x=1403, y=186) with size 67x69 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+
+DIFFERENCE GROUP 21:
+The image 1 is different from image 2 in the feature: Group of 28 related changes
+  - Group of 28 related changes: Group of 28 changes, mostly Brightness Decreased
+  - Location: Region at coordinates (x=1406, y=109) with size 238x77 pixels
+  - Contains the following specific differences:
+    1. Color Change: Color changed from Light Gray to White
+    2. Color Change: Color changed from Light Gray to White
+    3. Color Change: Color changed from Light Gray to White
+    4. Color Change: Color changed from Light Gray to White
+    5. Color Change: Color changed from Light Gray to White
+    6. Color Change: Color changed from Light Gray to White
+    7. Color Change: Color changed from Light Gray to White
+    8. Color Change: Color changed from Light Gray to White
+    9. Color Change: Color changed from Light Gray to White
+    10. Color Change: Color changed from Light Gray to White
+    11. Color Change: Color changed from Light Gray to White
+    12. Color Change: Color changed from Light Gray to White
+    13. Color Change: Color changed from Light Gray to White
+    14. Color Change: Color changed from White to Light Gray
+    15. Color Change: Color changed from White to Light Gray
+    16. Color Change: Color changed from White to Light Gray
+    17. Color Change: Color changed from White to Light Gray
+    18. Color Change: Color changed from White to Light Gray
+    19. Color Change: Color changed from White to Light Gray
+    20. Color Change: Color changed from White to Light Gray
+    21. Color Change: Color changed from White to Light Gray
+    22. Color Change: Color changed from White to Light Gray
+    23. Color Change: Color changed from White to Light Gray
+    24. Color Change: Color changed from White to Light Gray
+    25. Color Change: Color changed from White to Light Gray
+    26. Color Change: Color changed from White to Light Gray
+    27. Color Change: Color changed from White to Light Gray
+    28. Color Change: Color changed from Pink to Gray
+  - This group contains color modifications
+
+DIFFERENCE GROUP 22:
+The image 1 is different from image 2 in the feature: Group of 5 related changes
+  - Group of 5 related changes: Group of 5 changes, mostly Shape/Structure Change
+  - Location: Region at coordinates (x=1186, y=121) with size 126x22 pixels
+  - Contains the following specific differences:
+    1. Content Change: Removed content in this region
+    2. Content Change: Added content in this region
+    3. Content Change: Removed content in this region
+    4. Content Change: Added content in this region
+    5. Content Change: Removed content in this region
+  - This group contains structural modifications
+
+DIFFERENCE GROUP 23:
+The image 1 is different from image 2 in the feature: Group of 1 related changes
+  - Group of 1 related changes: Group of 1 changes, mostly Brightness Increased
+  - Location: Region at coordinates (x=1310, y=95) with size 96x188 pixels
+  - Contains the following specific differences:
+    1. Text Change: Text added: 'wg'
+  - This group contains text modifications
+
+
+SUMMARY:
+Total number of distinct differences: 23
+  - Color Change: 6 instances
+  - Content Change: 12 instances
+  - Text Change: 5 instances
+
+Overall image similarity: 0.97 on a scale of 0 to 1 (higher means more similar)
+Percentage of image area affected by changes: 1.5%

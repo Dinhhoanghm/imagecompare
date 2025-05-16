@@ -1,0 +1,1433 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Image Change Report</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1, h2, h3 { color: #333; }
+            .image-container { display: flex; margin-bottom: 20px; }
+            .image-container img { max-width: 45%; margin-right: 10px; }
+            .summary { background-color: #f5f5f5; padding: 15px; border-radius: 5px; }
+            .change-item { background-color: #fff; border: 1px solid #ddd; margin: 10px 0; padding: 15px; border-radius: 5px; }
+            .change-images { display: flex; margin-top: 10px; }
+            .change-images img { max-width: 45%; margin-right: 10px; border: 1px solid #ddd; }
+            .highlight { background-color: #ffffcc; }
+            .tabs { display: flex; margin-bottom: 10px; }
+            .tab { padding: 10px 15px; cursor: pointer; background-color: #ddd; margin-right: 5px; }
+            .tab.active { background-color: #f5f5f5; font-weight: bold; }
+            .tab-content { display: none; }
+            .tab-content.active { display: block; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            .image-map-container { position: relative; display: inline-block; }
+            .map-highlight { position: absolute; border: 2px solid; cursor: pointer; }
+            .tooltip { display: none; position: absolute; background: white; border: 1px solid #ddd; padding: 5px; z-index: 100; }
+            .group-info { background-color: #e8f4f8; border-left: 3px solid #4a90e2; padding: 10px; margin: 5px 0; }
+        </style>
+        <script>
+            function showTab(tabId) {
+                // Hide all tab contents
+                var tabContents = document.getElementsByClassName('tab-content');
+                for (var i = 0; i < tabContents.length; i++) {
+                    tabContents[i].classList.remove('active');
+                }
+
+                // Deactivate all tabs
+                var tabs = document.getElementsByClassName('tab');
+                for (var i = 0; i < tabs.length; i++) {
+                    tabs[i].classList.remove('active');
+                }
+
+                // Show the selected tab and content
+                document.getElementById(tabId).classList.add('active');
+                document.getElementById(tabId + '-tab').classList.add('active');
+            }
+
+            function showTooltip(id) {
+                document.getElementById('tooltip-' + id).style.display = 'block';
+            }
+
+            function hideTooltip(id) {
+                document.getElementById('tooltip-' + id).style.display = 'none';
+            }
+
+            function scrollToChange(id) {
+                document.getElementById('change-' + id).scrollIntoView({ behavior: 'smooth' });
+                // Highlight the element briefly
+                document.getElementById('change-' + id).classList.add('highlight');
+                setTimeout(function() {
+                    document.getElementById('change-' + id).classList.remove('highlight');
+                }, 1500);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Image Change Report</h1>
+
+        <div class="tabs">
+            <div id="overview-tab" class="tab active" onclick="showTab('overview')">Overview</div>
+            <div id="detailed-changes-tab" class="tab" onclick="showTab('detailed-changes')">Detailed Changes</div>
+            <div id="interactive-tab" class="tab" onclick="showTab('interactive')">Interactive View</div>
+            <div id="technical-tab" class="tab" onclick="showTab('technical')">Technical Details</div>
+        </div>
+
+        <div id="overview" class="tab-content active">
+            <div class="summary">
+                <h2>Image Comparison Summary</h2>
+                <p>Comparing: <b>{results['labels'][0]}</b> with <b>{results['labels'][1]}</b></p>
+                <p>Overall Similarity: <b>{results['ssim_score']:.2f}</b> (0-1 scale, higher means more similar)</p>
+                <p>Changed Area: <b>{results['diff_percentage']:.1f}%</b> of the image</p>
+                <p>Number of distinct changes: <b>{len(results['difference_regions'])}</b></p>
+                <p>Change grouping: <b>Enabled</b> (grouped 138 individual changes into 23 groups)</p>
+                <p>Grouping distance: <b>50 pixels</b></p>
+            </div>
+
+            <h3>Overview Images</h3>
+            <div class="image-container">
+                <img src="report_images/image1.png" alt="Original Image">
+                <img src="report_images/image2.png" alt="Modified Image">
+            </div>
+
+            <h3>Changes Highlighted</h3>
+            <div class="image-map-container">
+                <img src="report_images/highlighted.png" alt="Changes Highlighted">
+                
+                <div class="map-highlight" style="left: 315px; top: 696px; width: 132px; height: 14px; border-color: rgba(255, 0, 0, 1.0);"
+                    onmouseover="showTooltip(1)" onmouseout="hideTooltip(1)" onclick="scrollToChange(1)">
+                </div>
+                <div id="tooltip-1" class="tooltip" style="left: 452px; top: 696px;">
+                    Group #1: Contains 11 changes<br>Group of 11 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1348px; top: 696px; width: 35px; height: 14px; border-color: rgba(0, 255, 0, 1.0);"
+                    onmouseover="showTooltip(2)" onmouseout="hideTooltip(2)" onclick="scrollToChange(2)">
+                </div>
+                <div id="tooltip-2" class="tooltip" style="left: 1388px; top: 696px;">
+                    Group #2: Contains 2 changes<br>Group of 2 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1092px; top: 696px; width: 9px; height: 11px; border-color: rgba(0, 0, 255, 1.0);"
+                    onmouseover="showTooltip(3)" onmouseout="hideTooltip(3)" onclick="scrollToChange(3)">
+                </div>
+                <div id="tooltip-3" class="tooltip" style="left: 1106px; top: 696px;">
+                    Group #3: Contains 1 changes<br>Group of 1 changes, mostly Minor Visual Change
+                </div>
+                
+                <div class="map-highlight" style="left: 836px; top: 696px; width: 36px; height: 14px; border-color: rgba(255, 255, 0, 1.0);"
+                    onmouseover="showTooltip(4)" onmouseout="hideTooltip(4)" onclick="scrollToChange(4)">
+                </div>
+                <div id="tooltip-4" class="tooltip" style="left: 877px; top: 696px;">
+                    Group #4: Contains 2 changes<br>Group of 2 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1593px; top: 685px; width: 97px; height: 35px; border-color: rgba(255, 0, 255, 1.0);"
+                    onmouseover="showTooltip(5)" onmouseout="hideTooltip(5)" onclick="scrollToChange(5)">
+                </div>
+                <div id="tooltip-5" class="tooltip" style="left: 1695px; top: 685px;">
+                    Group #5: Contains 1 changes<br>Text changed from '(Overdue )' to 'On Track'
+                </div>
+                
+                <div class="map-highlight" style="left: 318px; top: 611px; width: 170px; height: 18px; border-color: rgba(0, 255, 255, 1.0);"
+                    onmouseover="showTooltip(6)" onmouseout="hideTooltip(6)" onclick="scrollToChange(6)">
+                </div>
+                <div id="tooltip-6" class="tooltip" style="left: 493px; top: 611px;">
+                    Group #6: Contains 13 changes<br>Group of 13 changes, mostly Brightness Decreased
+                </div>
+                
+                <div class="map-highlight" style="left: 1609px; top: 600px; width: 77px; height: 34px; border-color: rgba(255, 128, 0, 1.0);"
+                    onmouseover="showTooltip(7)" onmouseout="hideTooltip(7)" onclick="scrollToChange(7)">
+                </div>
+                <div id="tooltip-7" class="tooltip" style="left: 1691px; top: 600px;">
+                    Group #7: Contains 3 changes<br>Text changed from ')' to 'At Risk'
+                </div>
+                
+                <div class="map-highlight" style="left: 1348px; top: 611px; width: 35px; height: 14px; border-color: rgba(128, 0, 255, 1.0);"
+                    onmouseover="showTooltip(8)" onmouseout="hideTooltip(8)" onclick="scrollToChange(8)">
+                </div>
+                <div id="tooltip-8" class="tooltip" style="left: 1388px; top: 611px;">
+                    Group #8: Contains 2 changes<br>Group of 2 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1082px; top: 611px; width: 19px; height: 14px; border-color: rgba(0, 128, 255, 1.0);"
+                    onmouseover="showTooltip(9)" onmouseout="hideTooltip(9)" onclick="scrollToChange(9)">
+                </div>
+                <div id="tooltip-9" class="tooltip" style="left: 1106px; top: 611px;">
+                    Group #9: Contains 1 changes<br>Group of 1 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 827px; top: 611px; width: 19px; height: 14px; border-color: rgba(255, 0, 128, 1.0);"
+                    onmouseover="showTooltip(10)" onmouseout="hideTooltip(10)" onclick="scrollToChange(10)">
+                </div>
+                <div id="tooltip-10" class="tooltip" style="left: 851px; top: 611px;">
+                    Group #10: Contains 2 changes<br>Group of 2 changes, mostly Minor Visual Change
+                </div>
+                
+                <div class="map-highlight" style="left: 61px; top: 522px; width: 176px; height: 21px; border-color: rgba(255, 0, 0, 1.0);"
+                    onmouseover="showTooltip(11)" onmouseout="hideTooltip(11)" onclick="scrollToChange(11)">
+                </div>
+                <div id="tooltip-11" class="tooltip" style="left: 242px; top: 522px;">
+                    Group #11: Contains 12 changes<br>Text changed from '=' to '4'
+                </div>
+                
+                <div class="map-highlight" style="left: 827px; top: 525px; width: 19px; height: 14px; border-color: rgba(0, 255, 0, 1.0);"
+                    onmouseover="showTooltip(12)" onmouseout="hideTooltip(12)" onclick="scrollToChange(12)">
+                </div>
+                <div id="tooltip-12" class="tooltip" style="left: 851px; top: 525px;">
+                    Group #12: Contains 2 changes<br>Group of 2 changes, mostly Minor Visual Change
+                </div>
+                
+                <div class="map-highlight" style="left: 316px; top: 525px; width: 122px; height: 18px; border-color: rgba(0, 0, 255, 1.0);"
+                    onmouseover="showTooltip(13)" onmouseout="hideTooltip(13)" onclick="scrollToChange(13)">
+                </div>
+                <div id="tooltip-13" class="tooltip" style="left: 443px; top: 525px;">
+                    Group #13: Contains 4 changes<br>Group of 4 changes, mostly Brightness Decreased
+                </div>
+                
+                <div class="map-highlight" style="left: 1609px; top: 514px; width: 77px; height: 35px; border-color: rgba(255, 255, 0, 1.0);"
+                    onmouseover="showTooltip(14)" onmouseout="hideTooltip(14)" onclick="scrollToChange(14)">
+                </div>
+                <div id="tooltip-14" class="tooltip" style="left: 1691px; top: 514px;">
+                    Group #14: Contains 3 changes<br>Text changed from ')' to 'At Risk'
+                </div>
+                
+                <div class="map-highlight" style="left: 1338px; top: 525px; width: 45px; height: 14px; border-color: rgba(255, 0, 255, 1.0);"
+                    onmouseover="showTooltip(15)" onmouseout="hideTooltip(15)" onclick="scrollToChange(15)">
+                </div>
+                <div id="tooltip-15" class="tooltip" style="left: 1388px; top: 525px;">
+                    Group #15: Contains 3 changes<br>Group of 3 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1092px; top: 525px; width: 9px; height: 14px; border-color: rgba(0, 255, 255, 1.0);"
+                    onmouseover="showTooltip(16)" onmouseout="hideTooltip(16)" onclick="scrollToChange(16)">
+                </div>
+                <div id="tooltip-16" class="tooltip" style="left: 1106px; top: 525px;">
+                    Group #16: Contains 1 changes<br>Group of 1 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 588px; top: 514px; width: 155px; height: 35px; border-color: rgba(255, 128, 0, 1.0);"
+                    onmouseover="showTooltip(17)" onmouseout="hideTooltip(17)" onclick="scrollToChange(17)">
+                </div>
+                <div id="tooltip-17" class="tooltip" style="left: 748px; top: 514px;">
+                    Group #17: Contains 6 changes<br>Group of 6 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1177px; top: 242px; width: 146px; height: 30px; border-color: rgba(128, 0, 255, 1.0);"
+                    onmouseover="showTooltip(18)" onmouseout="hideTooltip(18)" onclick="scrollToChange(18)">
+                </div>
+                <div id="tooltip-18" class="tooltip" style="left: 1328px; top: 242px;">
+                    Group #18: Contains 29 changes<br>Group of 29 changes, mostly Brightness Increased
+                </div>
+                
+                <div class="map-highlight" style="left: 1485px; top: 232px; width: 127px; height: 12px; border-color: rgba(0, 128, 255, 1.0);"
+                    onmouseover="showTooltip(19)" onmouseout="hideTooltip(19)" onclick="scrollToChange(19)">
+                </div>
+                <div id="tooltip-19" class="tooltip" style="left: 1617px; top: 232px;">
+                    Group #19: Contains 5 changes<br>Group of 5 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1403px; top: 186px; width: 67px; height: 69px; border-color: rgba(255, 0, 128, 1.0);"
+                    onmouseover="showTooltip(20)" onmouseout="hideTooltip(20)" onclick="scrollToChange(20)">
+                </div>
+                <div id="tooltip-20" class="tooltip" style="left: 1475px; top: 186px;">
+                    Group #20: Contains 1 changes<br>Group of 1 changes, mostly Minor Visual Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1406px; top: 109px; width: 238px; height: 77px; border-color: rgba(255, 0, 0, 1.0);"
+                    onmouseover="showTooltip(21)" onmouseout="hideTooltip(21)" onclick="scrollToChange(21)">
+                </div>
+                <div id="tooltip-21" class="tooltip" style="left: 1649px; top: 109px;">
+                    Group #21: Contains 28 changes<br>Group of 28 changes, mostly Brightness Decreased
+                </div>
+                
+                <div class="map-highlight" style="left: 1186px; top: 121px; width: 126px; height: 22px; border-color: rgba(0, 255, 0, 1.0);"
+                    onmouseover="showTooltip(22)" onmouseout="hideTooltip(22)" onclick="scrollToChange(22)">
+                </div>
+                <div id="tooltip-22" class="tooltip" style="left: 1317px; top: 121px;">
+                    Group #22: Contains 5 changes<br>Group of 5 changes, mostly Shape/Structure Change
+                </div>
+                
+                <div class="map-highlight" style="left: 1310px; top: 95px; width: 96px; height: 188px; border-color: rgba(0, 0, 255, 1.0);"
+                    onmouseover="showTooltip(23)" onmouseout="hideTooltip(23)" onclick="scrollToChange(23)">
+                </div>
+                <div id="tooltip-23" class="tooltip" style="left: 1411px; top: 95px;">
+                    Group #23: Contains 1 changes<br>Group of 1 changes, mostly Brightness Increased
+                </div>
+                
+            </div>
+
+            <h3>Side-by-Side Comparison</h3>
+            <div class="image-container">
+                <img src="report_images/side_by_side.png" alt="Side-by-Side Comparison">
+            </div>
+
+            <h3>Removed vs Added Content</h3>
+            <div class="image-container">
+                <img src="report_images/composite.png" alt="Removed vs Added Content">
+            </div>
+        </div>
+
+        <div id="detailed-changes" class="tab-content">
+            <h2>Detailed Changes</h2>
+            
+            <div id="change-1" class="change-item">
+                <h3>Group #1: Contains 11 related changes</h3>
+                <p><b>Description:</b> Group of 11 related changes: Group of 11 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=315, y=696, width=132, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 11 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 2: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 3: Content Change - Removed content in this region</li>
+                
+                        <li>Change 4: Content Change - Removed content in this region</li>
+                
+                        <li>Change 5: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 6: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 7: Content Change - Removed content in this region</li>
+                
+                        <li>Change 8: Content Change - Added content in this region</li>
+                
+                        <li>Change 9: Content Change - Added content in this region</li>
+                
+                        <li>Change 10: Content Change - Removed content in this region</li>
+                
+                        <li>Change 11: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_1_old.png" alt="Original Region">
+                    <img src="report_images/region_1_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-2" class="change-item">
+                <h3>Group #2: Contains 2 related changes</h3>
+                <p><b>Description:</b> Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=1348, y=696, width=35, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 2 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Added content in this region</li>
+                
+                        <li>Change 2: Content Change - Removed content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_2_old.png" alt="Original Region">
+                    <img src="report_images/region_2_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-3" class="change-item">
+                <h3>Group #3: Contains 1 related changes</h3>
+                <p><b>Description:</b> Group of 1 related changes: Group of 1 changes, mostly Minor Visual Change</p>
+                <p><b>Location:</b> x=1092, y=696, width=9, height=11</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 1 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_3_old.png" alt="Original Region">
+                    <img src="report_images/region_3_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-4" class="change-item">
+                <h3>Group #4: Contains 2 related changes</h3>
+                <p><b>Description:</b> Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=836, y=696, width=36, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 2 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Added content in this region</li>
+                
+                        <li>Change 2: Content Change - Removed content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_4_old.png" alt="Original Region">
+                    <img src="report_images/region_4_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-5" class="change-item">
+                <h3>Group #5: Contains 1 related changes</h3>
+                <p><b>Description:</b> Group of 1 related changes: Text changed from '(Overdue )' to 'On Track'</p>
+                <p><b>Location:</b> x=1593, y=685, width=97, height=35</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 1 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Text Change - Words removed: '(Overdue )'; Words added: 'On Track'</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                    <li>Old Text: '(Overdue )'</li>
+                    <li>New Text: 'On Track'</li>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_5_old.png" alt="Original Region">
+                    <img src="report_images/region_5_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-6" class="change-item">
+                <h3>Group #6: Contains 13 related changes</h3>
+                <p><b>Description:</b> Group of 13 related changes: Group of 13 changes, mostly Brightness Decreased</p>
+                <p><b>Location:</b> x=318, y=611, width=170, height=18</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 13 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 2: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 3: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 4: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 5: Content Change - Removed content in this region</li>
+                
+                        <li>Change 6: Content Change - Removed content in this region</li>
+                
+                        <li>Change 7: Content Change - Removed content in this region</li>
+                
+                        <li>Change 8: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 9: Content Change - Added content in this region</li>
+                
+                        <li>Change 10: Content Change - Added content in this region</li>
+                
+                        <li>Change 11: Content Change - Added content in this region</li>
+                
+                        <li>Change 12: Color Change - Color changed from White to Gray</li>
+                
+                        <li>Change 13: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_6_old.png" alt="Original Region">
+                    <img src="report_images/region_6_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-7" class="change-item">
+                <h3>Group #7: Contains 3 related changes</h3>
+                <p><b>Description:</b> Group of 3 related changes: Text changed from ')' to 'At Risk'</p>
+                <p><b>Location:</b> x=1609, y=600, width=77, height=34</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 3 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Color Change - Color changed from Pink to White</li>
+                
+                        <li>Change 2: Text Change - Text added: 'At Risk'</li>
+                
+                        <li>Change 3: Text Change - Text removed: ')'</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                    <li>Old Text: ')'</li>
+                    <li>New Text: 'At Risk'</li>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_7_old.png" alt="Original Region">
+                    <img src="report_images/region_7_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-8" class="change-item">
+                <h3>Group #8: Contains 2 related changes</h3>
+                <p><b>Description:</b> Group of 2 related changes: Group of 2 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=1348, y=611, width=35, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 2 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                        <li>Change 2: Content Change - Removed content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_8_old.png" alt="Original Region">
+                    <img src="report_images/region_8_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-9" class="change-item">
+                <h3>Group #9: Contains 1 related changes</h3>
+                <p><b>Description:</b> Group of 1 related changes: Group of 1 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=1082, y=611, width=19, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 1 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_9_old.png" alt="Original Region">
+                    <img src="report_images/region_9_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-10" class="change-item">
+                <h3>Group #10: Contains 2 related changes</h3>
+                <p><b>Description:</b> Group of 2 related changes: Group of 2 changes, mostly Minor Visual Change</p>
+                <p><b>Location:</b> x=827, y=611, width=19, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 2 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                        <li>Change 2: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_10_old.png" alt="Original Region">
+                    <img src="report_images/region_10_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-11" class="change-item">
+                <h3>Group #11: Contains 12 related changes</h3>
+                <p><b>Description:</b> Group of 12 related changes: Text changed from '=' to '4'</p>
+                <p><b>Location:</b> x=61, y=522, width=176, height=21</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 12 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                        <li>Change 2: Content Change - Added content in this region</li>
+                
+                        <li>Change 3: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 4: Content Change - Removed content in this region</li>
+                
+                        <li>Change 5: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 6: Content Change - Removed content in this region</li>
+                
+                        <li>Change 7: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 8: Content Change - Added content in this region</li>
+                
+                        <li>Change 9: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 10: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 11: Content Change - Removed content in this region</li>
+                
+                        <li>Change 12: Text Change - Words removed: '='; Words added: '4'</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                    <li>Old Text: '='</li>
+                    <li>New Text: '4'</li>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_11_old.png" alt="Original Region">
+                    <img src="report_images/region_11_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-12" class="change-item">
+                <h3>Group #12: Contains 2 related changes</h3>
+                <p><b>Description:</b> Group of 2 related changes: Group of 2 changes, mostly Minor Visual Change</p>
+                <p><b>Location:</b> x=827, y=525, width=19, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 2 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                        <li>Change 2: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_12_old.png" alt="Original Region">
+                    <img src="report_images/region_12_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-13" class="change-item">
+                <h3>Group #13: Contains 4 related changes</h3>
+                <p><b>Description:</b> Group of 4 related changes: Group of 4 changes, mostly Brightness Decreased</p>
+                <p><b>Location:</b> x=316, y=525, width=122, height=18</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 4 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 2: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 3: Content Change - Added content in this region</li>
+                
+                        <li>Change 4: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_13_old.png" alt="Original Region">
+                    <img src="report_images/region_13_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-14" class="change-item">
+                <h3>Group #14: Contains 3 related changes</h3>
+                <p><b>Description:</b> Group of 3 related changes: Text changed from ')' to 'At Risk'</p>
+                <p><b>Location:</b> x=1609, y=514, width=77, height=35</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 3 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Color Change - Color changed from Pink to White</li>
+                
+                        <li>Change 2: Text Change - Text added: 'At Risk'</li>
+                
+                        <li>Change 3: Text Change - Text removed: ')'</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                    <li>Old Text: ')'</li>
+                    <li>New Text: 'At Risk'</li>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_14_old.png" alt="Original Region">
+                    <img src="report_images/region_14_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-15" class="change-item">
+                <h3>Group #15: Contains 3 related changes</h3>
+                <p><b>Description:</b> Group of 3 related changes: Group of 3 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=1338, y=525, width=45, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 3 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                        <li>Change 2: Content Change - Removed content in this region</li>
+                
+                        <li>Change 3: Content Change - Removed content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_15_old.png" alt="Original Region">
+                    <img src="report_images/region_15_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-16" class="change-item">
+                <h3>Group #16: Contains 1 related changes</h3>
+                <p><b>Description:</b> Group of 1 related changes: Group of 1 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=1092, y=525, width=9, height=14</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 1 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_16_old.png" alt="Original Region">
+                    <img src="report_images/region_16_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-17" class="change-item">
+                <h3>Group #17: Contains 6 related changes</h3>
+                <p><b>Description:</b> Group of 6 related changes: Group of 6 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=588, y=514, width=155, height=35</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 6 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Added content in this region</li>
+                
+                        <li>Change 2: Content Change - Removed content in this region</li>
+                
+                        <li>Change 3: Content Change - Removed content in this region</li>
+                
+                        <li>Change 4: Content Change - Removed content in this region</li>
+                
+                        <li>Change 5: Content Change - Removed content in this region</li>
+                
+                        <li>Change 6: Color Change - Color changed from Pink to White</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_17_old.png" alt="Original Region">
+                    <img src="report_images/region_17_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-18" class="change-item">
+                <h3>Group #18: Contains 29 related changes</h3>
+                <p><b>Description:</b> Group of 29 related changes: Group of 29 changes, mostly Brightness Increased</p>
+                <p><b>Location:</b> x=1177, y=242, width=146, height=30</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 29 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 2: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 3: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 4: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 5: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 6: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 7: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 8: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 9: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 10: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 11: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 12: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 13: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 14: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 15: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 16: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 17: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 18: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 19: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 20: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 21: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 22: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 23: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 24: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 25: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 26: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 27: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 28: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 29: Color Change - Color changed from White to Light Gray</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_18_old.png" alt="Original Region">
+                    <img src="report_images/region_18_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-19" class="change-item">
+                <h3>Group #19: Contains 5 related changes</h3>
+                <p><b>Description:</b> Group of 5 related changes: Group of 5 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=1485, y=232, width=127, height=12</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 5 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Added content in this region</li>
+                
+                        <li>Change 2: Content Change - Added content in this region</li>
+                
+                        <li>Change 3: Content Change - Added content in this region</li>
+                
+                        <li>Change 4: Content Change - Added content in this region</li>
+                
+                        <li>Change 5: Content Change - Added content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_19_old.png" alt="Original Region">
+                    <img src="report_images/region_19_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-20" class="change-item">
+                <h3>Group #20: Contains 1 related changes</h3>
+                <p><b>Description:</b> Group of 1 related changes: Group of 1 changes, mostly Minor Visual Change</p>
+                <p><b>Location:</b> x=1403, y=186, width=67, height=69</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 1 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_20_old.png" alt="Original Region">
+                    <img src="report_images/region_20_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-21" class="change-item">
+                <h3>Group #21: Contains 28 related changes</h3>
+                <p><b>Description:</b> Group of 28 related changes: Group of 28 changes, mostly Brightness Decreased</p>
+                <p><b>Location:</b> x=1406, y=109, width=238, height=77</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 28 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 2: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 3: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 4: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 5: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 6: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 7: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 8: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 9: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 10: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 11: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 12: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 13: Color Change - Color changed from Light Gray to White</li>
+                
+                        <li>Change 14: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 15: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 16: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 17: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 18: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 19: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 20: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 21: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 22: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 23: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 24: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 25: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 26: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 27: Color Change - Color changed from White to Light Gray</li>
+                
+                        <li>Change 28: Color Change - Color changed from Pink to Gray</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_21_old.png" alt="Original Region">
+                    <img src="report_images/region_21_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-22" class="change-item">
+                <h3>Group #22: Contains 5 related changes</h3>
+                <p><b>Description:</b> Group of 5 related changes: Group of 5 changes, mostly Shape/Structure Change</p>
+                <p><b>Location:</b> x=1186, y=121, width=126, height=22</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 5 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Content Change - Removed content in this region</li>
+                
+                        <li>Change 2: Content Change - Added content in this region</li>
+                
+                        <li>Change 3: Content Change - Removed content in this region</li>
+                
+                        <li>Change 4: Content Change - Added content in this region</li>
+                
+                        <li>Change 5: Content Change - Removed content in this region</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_22_old.png" alt="Original Region">
+                    <img src="report_images/region_22_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+            <div id="change-23" class="change-item">
+                <h3>Group #23: Contains 1 related changes</h3>
+                <p><b>Description:</b> Group of 1 related changes: Group of 1 changes, mostly Brightness Increased</p>
+                <p><b>Location:</b> x=1310, y=95, width=96, height=188</p>
+                
+                <div class="group-info">
+                    <p><b>This group contains 1 related changes:</b></p>
+                    <ul>
+                
+                        <li>Change 1: Text Change - Text added: 'wg'</li>
+                
+                    </ul>
+                </div>
+                
+                <p><b>Change Details:</b></p>
+                <ul>
+                
+                </ul>
+
+                <div class="change-images">
+                    <img src="report_images/region_23_old.png" alt="Original Region">
+                    <img src="report_images/region_23_new.png" alt="Modified Region">
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="interactive" class="tab-content">
+            <h2>Interactive View</h2>
+
+            <div class="image-map-container">
+                <img src="report_images/highlighted.png" alt="Interactive View" usemap="#image-map">
+                <map name="image-map">
+                
+                    <area shape="rect" coords="315,696,447,710" href="#change-1" 
+                          alt="Change #1" onclick="scrollToChange(1); return false;">
+                
+                    <area shape="rect" coords="1348,696,1383,710" href="#change-2" 
+                          alt="Change #2" onclick="scrollToChange(2); return false;">
+                
+                    <area shape="rect" coords="1092,696,1101,707" href="#change-3" 
+                          alt="Change #3" onclick="scrollToChange(3); return false;">
+                
+                    <area shape="rect" coords="836,696,872,710" href="#change-4" 
+                          alt="Change #4" onclick="scrollToChange(4); return false;">
+                
+                    <area shape="rect" coords="1593,685,1690,720" href="#change-5" 
+                          alt="Change #5" onclick="scrollToChange(5); return false;">
+                
+                    <area shape="rect" coords="318,611,488,629" href="#change-6" 
+                          alt="Change #6" onclick="scrollToChange(6); return false;">
+                
+                    <area shape="rect" coords="1609,600,1686,634" href="#change-7" 
+                          alt="Change #7" onclick="scrollToChange(7); return false;">
+                
+                    <area shape="rect" coords="1348,611,1383,625" href="#change-8" 
+                          alt="Change #8" onclick="scrollToChange(8); return false;">
+                
+                    <area shape="rect" coords="1082,611,1101,625" href="#change-9" 
+                          alt="Change #9" onclick="scrollToChange(9); return false;">
+                
+                    <area shape="rect" coords="827,611,846,625" href="#change-10" 
+                          alt="Change #10" onclick="scrollToChange(10); return false;">
+                
+                    <area shape="rect" coords="61,522,237,543" href="#change-11" 
+                          alt="Change #11" onclick="scrollToChange(11); return false;">
+                
+                    <area shape="rect" coords="827,525,846,539" href="#change-12" 
+                          alt="Change #12" onclick="scrollToChange(12); return false;">
+                
+                    <area shape="rect" coords="316,525,438,543" href="#change-13" 
+                          alt="Change #13" onclick="scrollToChange(13); return false;">
+                
+                    <area shape="rect" coords="1609,514,1686,549" href="#change-14" 
+                          alt="Change #14" onclick="scrollToChange(14); return false;">
+                
+                    <area shape="rect" coords="1338,525,1383,539" href="#change-15" 
+                          alt="Change #15" onclick="scrollToChange(15); return false;">
+                
+                    <area shape="rect" coords="1092,525,1101,539" href="#change-16" 
+                          alt="Change #16" onclick="scrollToChange(16); return false;">
+                
+                    <area shape="rect" coords="588,514,743,549" href="#change-17" 
+                          alt="Change #17" onclick="scrollToChange(17); return false;">
+                
+                    <area shape="rect" coords="1177,242,1323,272" href="#change-18" 
+                          alt="Change #18" onclick="scrollToChange(18); return false;">
+                
+                    <area shape="rect" coords="1485,232,1612,244" href="#change-19" 
+                          alt="Change #19" onclick="scrollToChange(19); return false;">
+                
+                    <area shape="rect" coords="1403,186,1470,255" href="#change-20" 
+                          alt="Change #20" onclick="scrollToChange(20); return false;">
+                
+                    <area shape="rect" coords="1406,109,1644,186" href="#change-21" 
+                          alt="Change #21" onclick="scrollToChange(21); return false;">
+                
+                    <area shape="rect" coords="1186,121,1312,143" href="#change-22" 
+                          alt="Change #22" onclick="scrollToChange(22); return false;">
+                
+                    <area shape="rect" coords="1310,95,1406,283" href="#change-23" 
+                          alt="Change #23" onclick="scrollToChange(23); return false;">
+                
+                </map>
+            </div>
+
+            <h3>Change Index</h3>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+                
+                <tr>
+                    <td>1</td>
+                    <td>Group (Color Change)</td>
+                    <td>Contains 11 related changes</td>
+                    <td>x=315, y=696</td>
+                    <td><a href="#" onclick="scrollToChange(1); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>2</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 2 related changes</td>
+                    <td>x=1348, y=696</td>
+                    <td><a href="#" onclick="scrollToChange(2); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>3</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 1 related changes</td>
+                    <td>x=1092, y=696</td>
+                    <td><a href="#" onclick="scrollToChange(3); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>4</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 2 related changes</td>
+                    <td>x=836, y=696</td>
+                    <td><a href="#" onclick="scrollToChange(4); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>5</td>
+                    <td>Group (Text Change)</td>
+                    <td>Contains 1 related changes</td>
+                    <td>x=1593, y=685</td>
+                    <td><a href="#" onclick="scrollToChange(5); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>6</td>
+                    <td>Group (Color Change)</td>
+                    <td>Contains 13 related changes</td>
+                    <td>x=318, y=611</td>
+                    <td><a href="#" onclick="scrollToChange(6); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>7</td>
+                    <td>Group (Text Change)</td>
+                    <td>Contains 3 related changes</td>
+                    <td>x=1609, y=600</td>
+                    <td><a href="#" onclick="scrollToChange(7); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>8</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 2 related changes</td>
+                    <td>x=1348, y=611</td>
+                    <td><a href="#" onclick="scrollToChange(8); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>9</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 1 related changes</td>
+                    <td>x=1082, y=611</td>
+                    <td><a href="#" onclick="scrollToChange(9); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>10</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 2 related changes</td>
+                    <td>x=827, y=611</td>
+                    <td><a href="#" onclick="scrollToChange(10); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>11</td>
+                    <td>Group (Text Change)</td>
+                    <td>Contains 12 related changes</td>
+                    <td>x=61, y=522</td>
+                    <td><a href="#" onclick="scrollToChange(11); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>12</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 2 related changes</td>
+                    <td>x=827, y=525</td>
+                    <td><a href="#" onclick="scrollToChange(12); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>13</td>
+                    <td>Group (Color Change)</td>
+                    <td>Contains 4 related changes</td>
+                    <td>x=316, y=525</td>
+                    <td><a href="#" onclick="scrollToChange(13); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>14</td>
+                    <td>Group (Text Change)</td>
+                    <td>Contains 3 related changes</td>
+                    <td>x=1609, y=514</td>
+                    <td><a href="#" onclick="scrollToChange(14); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>15</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 3 related changes</td>
+                    <td>x=1338, y=525</td>
+                    <td><a href="#" onclick="scrollToChange(15); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>16</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 1 related changes</td>
+                    <td>x=1092, y=525</td>
+                    <td><a href="#" onclick="scrollToChange(16); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>17</td>
+                    <td>Group (Color Change)</td>
+                    <td>Contains 6 related changes</td>
+                    <td>x=588, y=514</td>
+                    <td><a href="#" onclick="scrollToChange(17); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>18</td>
+                    <td>Group (Color Change)</td>
+                    <td>Contains 29 related changes</td>
+                    <td>x=1177, y=242</td>
+                    <td><a href="#" onclick="scrollToChange(18); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>19</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 5 related changes</td>
+                    <td>x=1485, y=232</td>
+                    <td><a href="#" onclick="scrollToChange(19); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>20</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 1 related changes</td>
+                    <td>x=1403, y=186</td>
+                    <td><a href="#" onclick="scrollToChange(20); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>21</td>
+                    <td>Group (Color Change)</td>
+                    <td>Contains 28 related changes</td>
+                    <td>x=1406, y=109</td>
+                    <td><a href="#" onclick="scrollToChange(21); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>22</td>
+                    <td>Group (Content Change)</td>
+                    <td>Contains 5 related changes</td>
+                    <td>x=1186, y=121</td>
+                    <td><a href="#" onclick="scrollToChange(22); return false;">View</a></td>
+                </tr>
+                
+                <tr>
+                    <td>23</td>
+                    <td>Group (Text Change)</td>
+                    <td>Contains 1 related changes</td>
+                    <td>x=1310, y=95</td>
+                    <td><a href="#" onclick="scrollToChange(23); return false;">View</a></td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div id="technical" class="tab-content">
+            <h2>Technical Details</h2>
+
+            <h3>Analysis Parameters</h3>
+            <ul>
+                <li>SSIM (Structural Similarity Index): 0.9706</li>
+                <li>Difference threshold: 30</li>
+                <li>Total pixels in image: 1,369,368</li>
+                <li>Changed pixels: 21,215</li>
+                <li>Text detection available: Yes</li>
+            </ul>
+
+            <h3>Change Type Distribution</h3>
+            
+            <table>
+                <tr>
+                    <th>Change Type</th>
+                    <th>Count</th>
+                    <th>Percentage</th>
+                </tr>
+                
+                <tr>
+                    <td>Color Change</td>
+                    <td>6</td>
+                    <td>26.1%</td>
+                </tr>
+                
+                <tr>
+                    <td>Content Change</td>
+                    <td>12</td>
+                    <td>52.2%</td>
+                </tr>
+                
+                <tr>
+                    <td>Text Change</td>
+                    <td>5</td>
+                    <td>21.7%</td>
+                </tr>
+                
+            </table>
+
+            <h3>Detailed Analysis Methodology</h3>
+            <p>This report was generated using the following techniques:</p>
+            <ul>
+                <li>Structural Similarity Index (SSIM) for overall image comparison</li>
+                <li>Pixel-by-pixel difference detection with threshold 30</li>
+                <li>Contour analysis to identify distinct change regions</li>
+                <li>Color analysis using RGB distance calculation</li>
+                <li>Edge detection to identify structural changes</li>
+                <li>Brightness and contrast differential analysis</li>
+            </ul>
+            
+            <h3>Change Grouping Methodology</h3>
+            <p>Changes were grouped using the following approach:</p>
+            <ul>
+                <li>DBSCAN clustering algorithm was used to group nearby changes</li>
+                <li>Maximum distance between changes in the same group: 50 pixels</li>
+                <li>All changes within this distance of each other are grouped together</li>
+                <li>Each group is assigned a common color and ID for easier identification</li>
+            </ul>
+            
+        </div>
+    </body>
+    </html>
+    
